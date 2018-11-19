@@ -29,118 +29,75 @@
       </nav>
     </header>
 
-    <h1><a href="#">Nov 30</a> - Minimal Scheme Interpreter</h1>
+    <h1><a href="#">Nov 19</a> - Minimal Scheme Interpreter</h1>
     <div class="container">
       <p>This is a basic Lisp (technically Scheme) interpreter that was written in C for educational purposes with the following features:</p>
-      <h1 id="about">About</h1>
-      <ul class="incremental">
-	<li>[X] Lexing Phase
-	  <ul class="incremental">
-	    <li>[X] read and split text containing Scheme/Lisp syntax into tokens</li>
-	    <li>[X] extract values like strings and numerical literals</li>
-	</ul></li>
-	<li>[-] Parsing Phase
-	  <ul class="incremental">
-	    <li>[X] parse the tokens into a s-expression object</li>
-	    <li>[-] replace some syntactic sugar while parsing
-	      <ul class="incremental">
-		<li>[X] <code>(quote expr)</code> and ='expr=</li>
-		<li>[ ] <code>(define f (lambda (args) (body)))</code> and <code>(define (f args) (body))</code></li>
-		<li>[ ] <code>(define f (lambda (args) (body)))</code> and <code>(defun f (args) (body))</code></li>
-	    </ul></li>
-	</ul></li>
-	<li>[X] Evaluation Phase
-	  <ul class="incremental">
-	    <li>[X] evaluate the parsed s-expression object</li>
-	    <li>[X] support recursion</li>
-	</ul></li>
-	<li>[X] syntax support
-	  <ul class="incremental">
-	    <li>[X] arithmetic operators <code>+</code>, <code>-</code>, <code>*</code> and <code>/</code></li>
-	    <li>[X] arithmetic comparison operators</li>
-	    <li>[X] cons-pairs operators <code>cons</code>, <code>car</code>, <code>cdr</code>, <code>set-car</code> and <code>set-cdr</code></li>
-	    <li>[X] logical operators <code>and</code>, <code>or</code> and <code>not</code></li>
-	    <li>[X] defining symbols that hold values using <code>define</code>
-	      <ul class="incremental">
-		<li>[X] remove them using <code>undef</code></li>
-		<li>[X] modify their values using <code>set</code> and <code>setq</code></li>
-	    </ul></li>
-	    <li>[X] conditioning using <code>if</code> and logical operators <code>and</code>, <code>or</code>, <code>not</code></li>
-	    <li>[X] support lambda expressions</li>
-	</ul></li>
-	<li>[X] memory is handled via a garbage collector</li>
-	<li>[ ] <del>support simple objects</del></li>
-      </ul>
       <h2 id="notes">NOTES</h2>
       <ul class="incremental">
-	<li><p>programming for me is a passion, sort of art, thus; this is just for fun and learning new stuff. and what could be more wonderful than writing your own lisp interpreter.</p></li>
-	<li><p>for the purpose learning more, Lisp and Scheme are the same for the moment, so the code written in here is a mix between the two languages</p></li>
-	<li><p>there might be an undefined number of <strong>bugs</strong> in here, I'm aware of some and some remain unknown.</p></li>
+	<li><p>Programming for me is a passion, sort of art, thus; this is just for the sake having fun while learning new stuff. And what could be more wonderful than writing your own lisp interpreter.</p></li>
+	<li><p>For the purpose learning more, Lisp and Scheme are the same for the moment, so the code written in here is a mix between the two languages</p></li>
+	<li><p>
+	    There might be an undefined number of <strong>bugs</strong> In here, I'm aware of some and some remain unknown.</p></li>
       </ul>
       <h1 id="lisp-as-a-programming-language">Lisp as a programming language</h1>
       <p>LISP is a really old <em>functional programming language</em> that stands for literally for <em>LISt Processing</em> because it is based on a data structure called <em>List</em>. It was invented by Mr. <em>John McCarthy</em> (a genius) and the first time lisp was mentioned was in a paper published in 1959 called <a href="http://www-formal.stanford.edu/jmc/recursive.pdf">Recursive Functions of Symbolic Expressions and Their Computation by Machine</a>. Also, a nice paper published in 2002 by Mr. <em>Paul Graham</em> called <a href="http://www.paulgraham.com/rootsoflisp.html">Roots of Lisp</a> contain some useful information based on what Lisp did while being around since the first appearance in the 1959's paper as well as basic lisp functionalities and syntax</p>
       <blockquote>
 	<p>Generally, Lisp is based on s-exps i.e. <em>symbolic expressions</em>. An expression is either an <em>atom</em> -- sequence of characters, or a <em>list of more expressions</em></p>
       </blockquote>
-      <div><pre class="highlight"><code><span class="co">;;; Comments start with &#39;;&#39;.</span>
+<div><pre class="highlight"><code><span class="co">;;; Comments start with &#39;;&#39;.</span>
 <span class="co">;;; anything form the &#39;;&#39; to &#39;\n&#39; is ignored</span>
 <span class="co">;;; This is an example of syntax supported by this interpreter</span>
 
 <span class="co">;; Basic Arithmetic</span>
-(<span class="kw">*</span> (<span class="kw">+</span> <span class="dv">3</span> (<span class="kw">/</span> <span class="dv">4</span> <span class="dv">2</span>)) (<span class="kw">-</span> <span class="dv">3</span> <span class="dv">4</span>))		<span class="co">; -5</span>
-(<span class="kw">sqrt</span> (square <span class="dv">2</span>))		    <span class="co">; 2</span>
+(<span class="kw">*</span> (<span class="kw">+</span> <span class="dv">3</span> (<span class="kw">/</span> <span class="dv">4</span> <span class="dv">2</span>)) (<span class="kw">-</span> <span class="dv">3</span> <span class="dv">4</span>))		<span class="co">	; -5</span>
+(<span class="kw">sqrt</span> (square <span class="dv">2</span>))		    <span class="co">		; 2</span>
 
-<span class="co">;; Build a list using cons</span>
-(<span class="kw">cons</span> &#39;a (<span class="kw">cons</span> &#39;b (<span class="kw">cons</span> &#39;c nil)))	<span class="co">; (a b c)</span>
+<span class="co">;; Build a lists and pairs using cons</span>
+(define pair-one (<span class="kw">cons</span> &#39;a <span class="kw"></span>&#39;b<span class="kw"></span>))	<span class="co">		; (a . b)</span>
 
 <span class="co">;; Defining symbols as s-expressions or lambdas</span>
-(<span class="kw">define</span><span class="fu"> foo </span>(<span class="kw">+</span> <span class="dv">1</span> (<span class="kw">*</span> <span class="dv">2</span> <span class="dv">5</span>)))		<span class="co">; 11</span>
-(<span class="kw">define</span><span class="fu"> bar </span>&#39;(<span class="kw">+</span> <span class="dv">1</span> <span class="dv">4</span>))		<span class="co">; (+ 1 4)</span>
-(<span class="kw">define</span><span class="fu"> baz </span>(<span class="kw">eval</span> bar))	    <span class="co">; 5</span>
-
-(<span class="kw">define</span><span class="fu"> list-one </span>(<span class="kw">cons</span>
-&#39;a (<span class="kw">cons</span>
-&#39;b (<span class="kw">cons</span>
-&#39;c nil))))	  <span class="co">; (a b c)</span>
-(<span class="kw">define</span><span class="fu"> list-two </span>(<span class="kw">list</span> a b c))	<span class="co">; (a b c)</span>
-(<span class="kw">define</span><span class="fu"> list-three </span>&#39;(a b c))	    <span class="co">; (a b c)</span>
-
-<span class="co">;; Applying car/cdr operations</span>
-(<span class="kw">car</span> list-one)		<span class="co">; a</span>
-(<span class="kw">cdr</span> list-two)		<span class="co">; (b c)</span>
-(<span class="kw">cadr</span> list-three)		    <span class="co">; b</span>
+(<span class="kw">define</span><span class="fu"> foo </span>(<span class="kw">+</span> <span class="dv">1</span> (<span class="kw">*</span> <span class="dv">2</span> <span class="dv">5</span>)))			<span class="co">; 11</span>
+(<span class="kw">define</span><span class="fu"> bar </span>&#39;(<span class="kw">+</span> <span class="dv">1</span> <span class="dv">4</span>))		<span class="co">		; (+ 1 4)</span>
+(<span class="kw">define</span><span class="fu"> baz </span>(<span class="kw">eval</span> bar))	    <span class="co">			; 5</span>
+<span class="kw"></span><span class="fu"></span><span class="kw"></span><span class="kw"></span><span class="kw"></span><span class="co"></span>
+(<span class="kw">define</span><span class="fu"> list-two </span>(<span class="kw">list</span> a b c))			<span class="co">; (a b c)</span>
+(<span class="kw">define</span><span class="fu"> list-three </span>&#39;(a b c))	    <span class="co">		; (a b c)</span>
+================================================================================
+<span class="co">;; Applying car/cdr operations</span><span class="kw"></span><span class="co"></span>
+(<span class="kw">cdr</span> list-two)		<span class="co">			; (b c)</span>
+(<span class="kw">cadr</span> list-three)		    <span class="co">		; b</span>
 
 <span class="co">;; Recursion with factorial</span>
 (<span class="kw">define</span><span class="fu"> fact</span>
-(<span class="kw">lambda</span> (n)
-(<span class="kw">if</span> (<span class="kw">&lt;=</span> n <span class="dv">1</span>) <span class="dv">1</span>
-(<span class="kw">*</span> n (fact (<span class="kw">-</span> n <span class="dv">1</span>))))))
-(fact baz)			<span class="co">; 120</span>
+  (<span class="kw">lambda</span> (n)
+    (<span class="kw">if</span> (<span class="kw">&lt;=</span> n <span class="dv">1</span>) <span class="dv">1</span>
+      (<span class="kw">*</span> n (fact (<span class="kw">-</span> n <span class="dv">1</span>))))))
+(fact baz)					<span class="co">; 120</span>
 
 <span class="co">;; Recursion with fibonacci</span>
 (<span class="kw">define</span><span class="fu"> fib</span>
-(<span class="kw">lambda</span> (n)
-(<span class="kw">if</span> (<span class="kw">=</span> n <span class="dv">0</span>) <span class="dv">1</span>
-(<span class="kw">if</span> (<span class="kw">=</span> n <span class="dv">1</span>) <span class="dv">1</span>
-(<span class="kw">+</span> (fib (<span class="kw">-</span> n <span class="dv">2</span>))
-(fib (<span class="kw">-</span> n <span class="dv">1</span>)))))))
-(fib foo)			<span class="co">; 144</span>
+  (<span class="kw">lambda</span> (n)
+    (<span class="kw">if</span> (<span class="kw">=</span> n <span class="dv">0</span>) <span class="dv">1</span>
+      (<span class="kw">if</span> (<span class="kw">=</span> n <span class="dv">1</span>) <span class="dv">1</span>
+	(<span class="kw">+</span> (fib (<span class="kw">-</span> n <span class="dv">2</span>))
+	  (fib (<span class="kw">-</span> n <span class="dv">1</span>)))))))
+(fib foo)					<span class="co">; 144</span>
 
 <span class="co">;; let operator</span>
 (<span class="kw">let</span> ((foo (<span class="kw">list</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span>)))
-(<span class="kw">cadr</span> foo))		      <span class="co">; 2</span>
+  (<span class="kw">cadr</span> foo))		      <span class="co">			; 2</span>
 
 <span class="co">;; loop usign labeled let</span>
 (<span class="kw">let</span> loop ((n <span class="dv">0</span>))
-(<span class="kw">if</span> (<span class="kw">&gt;</span> n <span class="dv">5</span>)
-&#39;()
-(<span class="kw">cons</span> n
-(loop (<span class="kw">+</span> n <span class="dv">1</span>)))))	    <span class="co">; (0 1 2 3 4 5)</span>
+  (<span class="kw">if</span> (<span class="kw">&gt;</span> n <span class="dv">5</span>)
+    &#39;()
+    (<span class="kw">cons</span> n
+      (loop (<span class="kw">+</span> n <span class="dv">1</span>)))))				<span class="co">; (0 1 2 3 4 5)</span>
 
 <span class="co">;; map operator</span>
 (map fib (<span class="kw">let</span> ((x &#39;(<span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span>)))
-(<span class="kw">let</span> ((y <span class="dv">9</span>))
-(append-to x y))))	   <span class="co">; (1 2 3 55)</span>
+	   (<span class="kw">let</span> ((y <span class="dv">9</span>))
+	     (append-to x y))))			 <span class="co">; (1 2 3 55)</span>
 
 <span class="co">;; for more library functions check stdlib.scm</span></code></pre></div>
       <h1 id="a-basic-lisp-interpreter">A basic Lisp Interpreter</h1>
@@ -181,6 +138,45 @@
 	<p><em>NOTE:</em> See eval.{h,c} for additional information on the evaluation process and related function definitions.</p>
       </blockquote>
 
+      <h1 id="about">build state</h1>
+      <ul class="incremental">
+	<li>[X] Lexing Phase
+	  <ul class="incremental">
+	    <li>[X] read and split text containing Scheme/Lisp syntax into tokens</li>
+	    <li>[X] extract values like strings and numerical literals</li>
+	</ul></li>
+	<li>[-] Parsing Phase
+	  <ul class="incremental">
+	    <li>[X] parse the tokens into a s-expression object</li>
+	    <li>[-] replace some syntactic sugar while parsing
+	      <ul class="incremental">
+		<li>[X] <code>(quote expr)</code> and ='expr=</li>
+		<li>[ ] <code>(define f (lambda (args) (body)))</code> and <code>(define (f args) (body))</code></li>
+		<li>[ ] <code>(define f (lambda (args) (body)))</code> and <code>(defun f (args) (body))</code></li>
+	    </ul></li>
+	</ul></li>
+	<li>[X] Evaluation Phase
+	  <ul class="incremental">
+	    <li>[X] evaluate the parsed s-expression object</li>
+	    <li>[X] support recursion</li>
+	</ul></li>
+	<li>[X] syntax support
+	  <ul class="incremental">
+	    <li>[X] arithmetic operators <code>+</code>, <code>-</code>, <code>*</code> and <code>/</code></li>
+	    <li>[X] arithmetic comparison operators</li>
+	    <li>[X] cons-pairs operators <code>cons</code>, <code>car</code>, <code>cdr</code>, <code>set-car</code> and <code>set-cdr</code></li>
+	    <li>[X] logical operators <code>and</code>, <code>or</code> and <code>not</code></li>
+	    <li>[X] defining symbols that hold values using <code>define</code>
+	      <ul class="incremental">
+		<li>[X] remove them using <code>undef</code></li>
+		<li>[X] modify their values using <code>set</code> and <code>setq</code></li>
+	    </ul></li>
+	    <li>[X] conditioning using <code>if</code> and logical operators <code>and</code>, <code>or</code>, <code>not</code></li>
+	    <li>[X] support lambda expressions</li>
+	</ul></li>
+	<li>[X] memory is handled via a garbage collector</li>
+	<li>[ ] <del>support simple objects</del></li>
+      </ul>
     </div>
     <footer>
       <nav>

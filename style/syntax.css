@@ -11,6 +11,19 @@ code {
 }
 
 
+pre {
+    color: #CDD6D5;
+    border-top: 3px solid #CDD6D5;
+    border-bottom: 3px solid #CDD6D5;
+    line-height: 0.90;
+    overflow-x: auto;
+    max-width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+
+}
+
+
 @media only screen and (orientation:portrait){
     code {
 	font-size: 15px;
@@ -21,14 +34,6 @@ code {
     code {
 	font-size: 20px;
     }
-}
-
-pre {
-    color: #CDD6D5;
-    border-top: 3px solid #CDD6D5;
-    border-bottom: 3px solid #CDD6D5;
-    line-height: 0.80;
-    overflow-x: scroll;
 }
 
 /* Syntax classes */
