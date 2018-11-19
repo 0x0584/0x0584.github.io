@@ -31,14 +31,18 @@
 
     <h1><a href="#">Nov 19</a> - Minimal Scheme Interpreter</h1>
     <div class="container">
-      <p>This is a basic Lisp (technically Scheme) interpreter that was written in C for educational purposes with the following features:</p>
-      <h2 id="notes">NOTES</h2>
-      <ul class="incremental">
-	<li><p>Programming for me is a passion, sort of art, thus; this is just for the sake having fun while learning new stuff. And what could be more wonderful than writing your own lisp interpreter.</p></li>
-	<li><p>For the purpose learning more, Lisp and Scheme are the same for the moment, so the code written in here is a mix between the two languages</p></li>
-	<li><p>
-	    There might be an undefined number of <strong>bugs</strong> In here, I'm aware of some and some remain unknown.</p></li>
-      </ul>
+      <p>This is a basic Lisp (technically Scheme) interpreter programmed in C for educational purposes with the following features:</p>
+      <h1 id="notes">NOTES</h1>
+      <blockquote>
+	<p>Programming for me is a passion, sort of art, thus; this is just for fun and learning new stuff. And what could be more wonderful than writing your own lisp interpreter. For the purpose learning more, Lisp and Scheme are the same for the moment, so the code written in here is a mix between the two languages. There might be an undefined number of <strong>bugs</strong> in here, I'm aware of some and some remain unknown.</p>
+      </blockquote>
+      <p>The source code contains documentation, you can either read it in each file, reading the man pages or extract the documentation using <a href="http://www.doxygen.org/">Doxygen</a> as HTML or LaTex. Compilation requires <code>make</code> and done as follows:</p>
+<pre class="highlight"><code>$ make			<span class="c"># compile the code</span>
+<span class="sp">$</span> make clean		<span class="c"># removes the objects and the executable</span>
+<span class="sp">$</span> make build		<span class="c"># same as make clean && make</span>
+</code></pre>
+      <p>The intepreter's standard library function are stored in <code>stdlib.scm</code>, the other files are just for testings</p>
+
       <h1 id="lisp-as-a-programming-language">Lisp as a programming language</h1>
       <p>LISP is a really old <em>functional programming language</em> that stands for literally for <em>LISt Processing</em> because it is based on a data structure called <em>List</em>. It was invented by Mr. <em>John McCarthy</em> (a genius) and the first time lisp was mentioned was in a paper published in 1959 called <a href="http://www-formal.stanford.edu/jmc/recursive.pdf">Recursive Functions of Symbolic Expressions and Their Computation by Machine</a>. Also, a nice paper published in 2002 by Mr. <em>Paul Graham</em> called <a href="http://www.paulgraham.com/rootsoflisp.html">Roots of Lisp</a> contain some useful information based on what Lisp did while being around since the first appearance in the 1959's paper as well as basic lisp functionalities and syntax</p>
       <blockquote>
@@ -62,7 +66,6 @@
 <span class="kw"></span><span class="fu"></span><span class="kw"></span><span class="kw"></span><span class="kw"></span><span class="co"></span>
 (<span class="kw">define</span><span class="fu"> list-two </span>(<span class="kw">list</span> a b c))			<span class="co">; (a b c)</span>
 (<span class="kw">define</span><span class="fu"> list-three </span>&#39;(a b c))	    <span class="co">		; (a b c)</span>
-================================================================================
 <span class="co">;; Applying car/cdr operations</span><span class="kw"></span><span class="co"></span>
 (<span class="kw">cdr</span> list-two)		<span class="co">			; (b c)</span>
 (<span class="kw">cadr</span> list-three)		    <span class="co">		; b</span>
@@ -138,7 +141,7 @@
 	<p><em>NOTE:</em> See eval.{h,c} for additional information on the evaluation process and related function definitions.</p>
       </blockquote>
 
-      <h1 id="about">build state</h1>
+      <h1 id="about">State of construction</h1>
       <ul class="incremental">
 	<li>[X] Lexing Phase
 	  <ul class="incremental">
