@@ -35,7 +35,7 @@ body {
     }
 
     blockquote {
-	border-left: 8px solid #CDD6D5;
+	border-left: 8px solid #415B76;
     }
 }
 
@@ -47,7 +47,7 @@ body {
     }
 
     blockquote {
-	border-left: 10px solid #CDD6D5;
+	border-left: 10px solid #415B76;
     }
 }
 
@@ -57,11 +57,11 @@ footer, header {
 }
 
 header {
-    border-bottom: solid 1px;
+    border-bottom: solid 3px;
 }
 
 footer {
-    border-top: solid 1px;
+    border-top: solid 3px;
 }
 
 footer nav {
@@ -106,8 +106,12 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 3px;
     margin-bottom: 3px;
     font-weight: normal;
+    color: #A7C4C2;
 }
 
+h1 a, nav a {
+	color: #A7C4C2;
+}
 .container h1, .container h2, .container h3, .container h4, .container h5, .container h6 {
     padding: 20px 0px 0px;
 }
@@ -141,7 +145,9 @@ video {
 blockquote {
     margin-left: -30px;
     padding-left: 20px;
-    border-left: 10px solid #CDD6D5;
+    border-left: 10px solid #415B76;
+    font-style: italic;
+    color: #7B9BA6;
 }
 
 ul {
