@@ -34,33 +34,38 @@
 
     <h1><a href="#">Nov 19</a> - Minimal Scheme Interpreter</h1>
     <div class="container">
-      <p>This is a basic Lisp (technically Scheme) interpreter programmed in C for educational purposes with the following features:</p>
+      <p>This is a basic interpreter that evaluates Lisp and Scheme-like syntax, written in C Programming Language; mainly for educational purposes.</p>
+
       <h1 id="notes">NOTES</h1>
       <blockquote>
-	<p>Programming for me is a passion, sort of art, thus; this is just for fun and learning new stuff. And what could be more wonderful than writing your own lisp interpreter. For the purpose learning more, Lisp and Scheme are the same for the moment, so the code written in here is a mix between the two languages. There might be an undefined number of <strong>bugs</strong> in here, I'm aware of some and some remain unknown.</p>
+	<p>
+	  Programming for me is a passion, sort of art, thus; this is just for the sake of having fun while learning new stuff. And what could be more wonderful than writing your own Lisp interpreter? Moreover, this interpreter supports now or would support later <em>(see <a href="#todos">TODOs</a>) </em> a mix between Common Lisp and Scheme. And the reason why the mixture between Scheme and Lisp, is because why not!?</p>
+
+	<p> However, there might be an undefined number of <b>bugs</b> in here, I'm aware of some and some remain unknown. So if you find any, you can either address it as an <a href="#btns">issue</a> , or fix it and open a <a href="#btns">pull request</a> . </p>
       </blockquote>
-      <p>The source code contains documentation, you can either read it in each file, reading the man pages or extract the documentation using <a href="http://www.doxygen.org/">Doxygen</a> as HTML or LaTex. Compilation requires <code>make</code> and done as follows:</p>
+
+      <p>The source code contains documentation, you can either read it in each file, reading the man pages or extract the documentation using <a href="http://www.doxygen.org/">Doxygen</a> as HTML or LaTex. Compilation requires make:</p>
+
 <pre class="highlight"><code>$ make			<span class="c"># compile the code</span>
 <span class="sp">$</span> make clean		<span class="c"># removes the objects and the executable</span>
 <span class="sp">$</span> make build		<span class="c"># same as make clean && make</span>
 </code></pre>
-      <p>The intepreter's standard library function are stored in <code>stdlib.scm</code>, the other files are just for testings. </p>
-
+      <p>The interpreter is powered by a it's own standard library written in Scheme, which is <code> stdlib.scm </code>, the other files are just for testings.</p>
 
       <h1 id="lisp-as-a-programming-language">Lisp as a programming language</h1>
-      <p>LISP is a really old <em>functional programming language</em> that stands for literally for <em>LISt Processing</em> because it is based on a data structure called <em>List</em>. It was invented by Mr. <em>John McCarthy</em> (a genius) and the first time lisp was mentioned was in a paper published in 1959 called <a href="http://www-formal.stanford.edu/jmc/recursive.pdf">Recursive Functions of Symbolic Expressions and Their Computation by Machine</a>. Also, a nice paper published in 2002 by Mr. <em>Paul Graham</em> called <a href="http://www.paulgraham.com/rootsoflisp.html">Roots of Lisp</a> contain some useful information based on what Lisp did while being around since the first appearance in the 1959's paper as well as basic lisp functionalities and syntax</p>
+      <p>LISP is a really old <em>functional programming language</em> that stands for literally for <em>LISt Processing</em> because it is based on a data structure called <em>List</em>. It was invented by Mr. <em>John McCarthy</em> (a genius) and the first time lisp was mentioned was in a paper published in 1959 called <a href="http://www-formal.stanford.edu/jmc/recursive.pdf">Recursive Functions of Symbolic Expressions and Their Computation by Machine</a>. Also, a nice paper published in 2002 by Mr. <em>Paul Graham</em> called <a href="http://www.paulgraham.com/rootsoflisp.html">Roots of Lisp</a> contains some useful information based on what Lisp did while being around since the first appearance in the 1959's paper as well as basic lisp functionalities and syntax</p>
       <blockquote>
-	<p>Generally, Lisp is based on s-exps i.e. <em>symbolic expressions</em>. An expression is either an <em>atom</em> -- sequence of characters, or a <em>list of more expressions</em></p>
+	<p>Generally, Lisp is based on s-exps i.e. <a href="https://en.wikipedia.org/wiki/S-expression"><em>symbolic expressions</em></a>. An expression is either an <em>atom</em> -- sequence of characters, or a <em>list of more s-expressions</em></p>
       </blockquote>
 <div><pre class="highlight"><code><span class="co">;;; Comments start with &#39;;&#39;.</span>
-<span class="co">;;; anything form the &#39;;&#39; to &#39;\n&#39; is ignored</span>
+<span class="co">;;; anything from the &#39;;&#39; to &#39;\n&#39; is ignored</span>
 <span class="co">;;; This is an example of syntax supported by this interpreter</span>
 
 <span class="co">;; Basic Arithmetic</span>
 (<span class="kw">*</span> (<span class="kw">+</span> <span class="dv">3</span> (<span class="kw">/</span> <span class="dv">4</span> <span class="dv">2</span>)) (<span class="kw">-</span> <span class="dv">3</span> <span class="dv">4</span>))		<span class="co">	; -5</span>
 (<span class="kw">sqrt</span> (square <span class="dv">2</span>))		    <span class="co">		; 2</span>
 
-<span class="co">;; Build a lists and pairs using cons</span>
+<span class="co">;; Build lists and pairs using cons</span>
 (define pair-one (<span class="kw">cons</span> &#39;a <span class="kw"></span>&#39;b<span class="kw"></span>))	<span class="co">		; (a . b)</span>
 
 <span class="co">;; Defining symbols as s-expressions or lambdas</span>
@@ -94,7 +99,7 @@
 (<span class="kw">let</span> ((foo (<span class="kw">list</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span>)))
   (<span class="kw">cadr</span> foo))		      <span class="co">			; 2</span>
 
-<span class="co">;; loop usign labeled let</span>
+<span class="co">;; loop using labeled let</span>
 (<span class="kw">let</span> loop ((n <span class="dv">0</span>))
   (<span class="kw">if</span> (<span class="kw">&gt;</span> n <span class="dv">5</span>)
     &#39;()
@@ -107,7 +112,7 @@
 	     (append-to x y))))			 <span class="co">; (1 2 3 55)</span>
 
 <span class="co">;; for more library functions check stdlib.scm</span></code></pre></div>
-      <h1 id="a-basic-lisp-interpreter">A basic Lisp Interpreter</h1>
+      <h1 id="a-basic-lisp-interpreter">A basic Interpreter</h1>
       <p>To interpret a Lisp code, we have to pass through three fundamental phases, that goes from reading the source code and identify special tokens to assembling those tokens as a single s-expression. And finally evaluating that s-expression and print the result.</p>
       <dl class="incremental">
 	<dt>Lexing</dt>
@@ -121,17 +126,17 @@
 	</dd>
       </dl>
       <h2 id="lexing">Lexing</h2>
-      <p>The process of lexing is where the input, i.e. source code, is <em>splited into a Vector of tokens</em>. Each token have an associated value-buffer that holds additional information about the token, e.g. the content of a string.</p>
+      <p>The phase of lexing is where we extract tokens from the input, i.e. source code. Each token has an associated value-buffer that holds additional information about the token, e.g. the content of a string.</p>
       <blockquote>
-	<p><em>NOTE:</em> See lexer.{h,c} for additional information on possible token types and their meaning.=.</p>
+	<p><em>NOTE:</em> See lexer.{h,c} for additional information on possible token types and their meaning.</p>
       </blockquote>
       <h2 id="parsing">Parsing</h2>
-      <p>The process of parsing is where the tokens get converted into a s-expression. This is done by checking token, one after the other and based on the <em>token type</em> we create the correspondent s-expression until we reach the last token.</p>
+      <p>The phase of parsing is where the tokens get converted into a s-expression. This is done by checking token, one after the other and based on the <em>token type</em> we create the correspondent s-expression until we reach the last token.</p>
       <blockquote>
 	<p><em>NOTE:</em> See parser.{h,c} for additional information on the parsing process and related functions.</p>
       </blockquote>
       <h2 id="evaluation">Evaluation</h2>
-      <p>The process of evaluating a s-expression is basically a recursive process. Starts by identifying the operator and pass the arguments so that we could apply the operator on those arguments. a typical s-expression would look like this:</p>
+      <p>The phase of evaluating a s-expression is basically a recursive process. Starts by identifying the operator and pass the arguments so that we could apply the operator to those arguments. a typical s-expression would look like this:</p>
       <div><pre class="highlight"><code>(operator s-exprs...)
 (define x y "ssss")
 ;;; comment
@@ -145,51 +150,51 @@
 	<p><em>NOTE:</em> See eval.{h,c} for additional information on the evaluation process and related function definitions.</p>
       </blockquote>
 
-      <h1 id="about">State of construction</h1>
+      <h1 id="todos">TODOs</h1>
       <ul class="incremental">
 	<li>[X] Lexing Phase
 	  <ul class="incremental">
-	    <li>[X] read and split text containing Scheme/Lisp syntax into tokens</li>
-	    <li>[X] extract values like strings and numerical literals</li>
+	    <li>[X] <del>read and split text containing Scheme/Lisp syntax into tokens</del> </li>
+	    <li>[X] <del>extract values like strings and numerical literals</del> </li>
 	</ul></li>
 	<li>[-] Parsing Phase
 	  <ul class="incremental">
-	    <li>[X] parse the tokens into a s-expression object</li>
+	    <li>[X] <del>parse the tokens into a s-expression object</del> </li>
 	    <li>[-] replace some syntactic sugar while parsing
 	      <ul class="incremental">
-		<li>[X] <code>(quote expr)</code> and ='expr=</li>
+		<li>[X] <del><code>(quote expr)</code> and ='expr=</del> </li>
 		<li>[ ] <code>(define f (lambda (args) (body)))</code> and <code>(define (f args) (body))</code></li>
 		<li>[ ] <code>(define f (lambda (args) (body)))</code> and <code>(defun f (args) (body))</code></li>
 	    </ul></li>
 	</ul></li>
 	<li>[X] Evaluation Phase
 	  <ul class="incremental">
-	    <li>[X] evaluate the parsed s-expression object</li>
-	    <li>[X] support recursion</li>
+	    <li>[X] <del>evaluate the parsed s-expression object</del></li>
+	    <li>[X] <del>support recursion</del> </li>
 	</ul></li>
 	<li>[X] syntax support
 	  <ul class="incremental">
-	    <li>[X] arithmetic operators <code>+</code>, <code>-</code>, <code>*</code> and <code>/</code></li>
-	    <li>[X] arithmetic comparison operators</li>
-	    <li>[X] cons-pairs operators <code>cons</code>, <code>car</code>, <code>cdr</code>, <code>set-car</code> and <code>set-cdr</code></li>
-	    <li>[X] logical operators <code>and</code>, <code>or</code> and <code>not</code></li>
-	    <li>[X] defining symbols that hold values using <code>define</code>
+	    <li>[X] <del>arithmetic operators <code>+</code>, <code>-</code>, <code>*</code> and <code>/</code></del></li>
+	    <li>[X] <del>arithmetic comparison operators</del></li>
+	    <li>[X] <del>cons-pairs operators <code>cons</code>, <code>car</code>, <code>cdr</code>, <code>set-car</code> and <code>set-cdr</code></del></li>
+	    <li>[X] <del>logical operators <code>and</code>, <code>or</code> and <code>not</code></del></li>
+	    <li>[X] <del>defining symbols that hold values using <code>define</code></del>
 	      <ul class="incremental">
-		<li>[X] remove them using <code>undef</code></li>
-		<li>[X] modify their values using <code>set</code> and <code>setq</code></li>
+		<li>[-] remove them using <code>undef</code></li>
+		<li>[X] <del>modify their values using <code>set</code> and <code>setq</code></del></li>
 	    </ul></li>
-	    <li>[X] conditioning using <code>if</code> and logical operators <code>and</code>, <code>or</code>, <code>not</code></li>
-	    <li>[X] support lambda expressions</li>
+	    <li>[X] <del>conditioning using <code>if</code> and logical operators <code>and</code>, <code>or</code>, <code>not</code></del></li>
+	    <li>[X] <del>support lambda expressions</del></li>
 	</ul></li>
 	<li>[X] memory is handled via a garbage collector</li>
-	<li>[ ] <del>support simple objects</del></li>
+	<li>[ ] support simple objects</li>
       </ul>
 
-	<blockquote>
-	  If you found this project interesting, give it a star. However, this project is licensed under GPL v2; it is free software, you can modify it or distribute it WITHOUT ANY WARRANTY. For more information, see LICENSE. Cheers! <br>
-	</blockquote>
+      <blockquote>
+	If you found this project interesting, give it a star. However, this project is licensed under GPL v2; it is free software, you can modify it or distribute it WITHOUT ANY WARRANTY. For more information, see LICENSE. Cheers! <br>
+      </blockquote>
 
-	    <center style="margin-top:3px;">
+      <center id="btns" style="margin-top:3px;">
 	<a class="github-button" href="https://github.com/0x0584/scmin" data-icon="octicon-star" data-show-count="true" aria-label="Star 0x0584/scmin on GitHub">Star</a>
 	<a class="github-button" href="https://github.com/0x0584/scmin/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork 0x0584/scmin on GitHub">Fork</a>
 	<a class="github-button" href="https://github.com/0x0584/scmin/issues" data-icon="octicon-issue-opened" data-show-count="true" aria-label="Issue 0x0584/scmin on GitHub">Issue</a>
