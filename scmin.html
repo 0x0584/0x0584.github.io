@@ -135,46 +135,6 @@
 	<p><em>NOTE:</em> See eval.{h,c} for additional information on the evaluation process and related function definitions.</p>
       </blockquote>
 
-      <h1 id="todos">TODOs</h1>
-      <ul class="incremental">
-	<li>[X] Lexing Phase
-	  <ul class="incremental">
-	    <li>[X] <del>read and split text containing Scheme/Lisp syntax into tokens</del> </li>
-	    <li>[X] <del>extract values like strings and numerical literals</del> </li>
-	</ul></li>
-	<li>[-] Parsing Phase
-	  <ul class="incremental">
-	    <li>[X] <del>parse the tokens into a s-expression object</del> </li>
-	    <li>[-] replace some syntactic sugar while parsing
-	      <ul class="incremental">
-		<li>[X] <del><code>(quote expr)</code> and ='expr=</del> </li>
-		<li>[ ] <code>(define f (lambda (args) (body)))</code> and <code>(define (f args) (body))</code></li>
-		<li>[ ] <code>(define f (lambda (args) (body)))</code> and <code>(defun f (args) (body))</code></li>
-	    </ul></li>
-	</ul></li>
-	<li>[X] Evaluation Phase
-	  <ul class="incremental">
-	    <li>[X] <del>evaluate the parsed s-expression object</del></li>
-	    <li>[X] <del>support recursion</del> </li>
-	</ul></li>
-	<li>[X] syntax support
-	  <ul class="incremental">
-	    <li>[X] <del>arithmetic operators <code>+</code>, <code>-</code>, <code>*</code> and <code>/</code></del></li>
-	    <li>[X] <del>arithmetic comparison operators</del></li>
-	    <li>[X] <del>cons-pairs operators <code>cons</code>, <code>car</code>, <code>cdr</code>, <code>set-car</code> and <code>set-cdr</code></del></li>
-	    <li>[X] <del>logical operators <code>and</code>, <code>or</code> and <code>not</code></del></li>
-	    <li>[X] <del>defining symbols that hold values using <code>define</code></del>
-	      <ul class="incremental">
-		<li>[-] remove them using <code>undef</code></li>
-		<li>[X] <del>modify their values using <code>set</code> and <code>setq</code></del></li>
-	    </ul></li>
-	    <li>[X] <del>conditioning using <code>if</code> and logical operators <code>and</code>, <code>or</code>, <code>not</code></del></li>
-	    <li>[X] <del>support lambda expressions</del></li>
-	</ul></li>
-	<li>[X] memory is handled via a garbage collector</li>
-	<li>[ ] support simple objects</li>
-      </ul>
-
       <blockquote>
 	If you found this project interesting, give it a star. However, this project is licensed under GPL v2; it is free software, you can modify it or distribute it WITHOUT ANY WARRANTY. For more information, see LICENSE. Cheers! <br>
       </blockquote>
