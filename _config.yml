@@ -1,25 +1,13 @@
-title: Segmentation fault at 0x0584
-email: archid-@student.1337.ma
-baseurl: 0x0584.github.io
-description: This is my personal blog, I shall be updating it often.
-url: 0x0584.github.io
-domain: 0x0584.github.io
-twitter_username: 0x0584
-github_username:  0x0584
+title: "Segmentation fault at 0x0584"
+email: "archid-@student.1337.ma"
+description: "This is my personal blog, I shall be updating it regularly."
+baseurl: "" 
+url: "http://0x0584.github.com" 
+twitter_username: "0x0584"
+github_username:  "0x0584"
 
 # Build settings
+markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
-
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
