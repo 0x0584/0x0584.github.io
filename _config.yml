@@ -8,6 +8,7 @@ github_username:  "0x0584"
 
 # Build settings
 markdown: kramdown
+usemathjax: true
 theme: minima
 plugins:
   - jekyll-feed
